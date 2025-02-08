@@ -20,17 +20,17 @@ from rest_framework.routers import DefaultRouter
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from routines.views import RoutineViewSet, ExerciseViewSet
+from users.views import UserSignUpView
 
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-]
 router = DefaultRouter()
 router.register(r'routines', RoutineViewSet)
 router.register(r'exercises', ExerciseViewSet)
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/signup/', UserSignUpView.as_view(), name='user_signup'),
     path('api/', include(router.urls)),
 ]
